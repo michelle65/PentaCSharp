@@ -1,0 +1,6 @@
+C:\Users\Mihaela^\Desktop\TrainApp1\obj\Debug\TrainApp1.csprojResolveAssemblyReference.cache
+C:\Users\Mihaela^\Desktop\TrainApp1\bin\Debug\TrainApp1.exe.config
+C:\Users\Mihaela^\Desktop\TrainApp1\bin\Debug\TrainApp1.exe
+C:\Users\Mihaela^\Desktop\TrainApp1\bin\Debug\TrainApp1.pdb
+C:\Users\Mihaela^\Desktop\TrainApp1\obj\Debug\TrainApp1.exe
+C:\Users\Mihaela^\Desktop\TrainApp1\obj\Debug\TrainApp1.pdb
