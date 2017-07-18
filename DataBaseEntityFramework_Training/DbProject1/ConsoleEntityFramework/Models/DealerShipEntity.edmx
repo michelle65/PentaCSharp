@@ -1,0 +1,445 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CarsDealerShipModel2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="ProducerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Cars">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Year" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Engine" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fuel" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Color" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ServoDir" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" />
+          <Property Name="CarId" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="nchar" MaxLength="10" />
+          <Property Name="BirthDate" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Email" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Location" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="ContactPerson" Type="nchar" MaxLength="50" />
+          <Property Name="CarId" Type="int" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="PersonId" Type="int" Nullable="false" />
+          <Property Name="DealerShip Address" Type="nchar" MaxLength="100" Nullable="false" />
+          <Property Name="WorkPhone" Type="nchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Buyer_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Buyer" Type="Self.Buyer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buyer_Producer">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="0..1" />
+          <End Role="Buyer" Type="Self.Buyer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyer">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producer_Cars">
+          <End Role="Cars" Type="Self.Cars" Multiplicity="0..1" />
+          <End Role="Producer" Type="Self.Producer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producer">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seller_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarsDealerShipModel2StoreContainer">
+          <EntitySet Name="Buyer" EntityType="Self.Buyer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cars" EntityType="Self.Cars" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Producer" EntityType="Self.Producer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Seller" EntityType="Self.Seller" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Buyer_Person" Association="Self.FK_Buyer_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Buyer" EntitySet="Buyer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buyer_Producer" Association="Self.FK_Buyer_Producer">
+            <End Role="Producer" EntitySet="Producer" />
+            <End Role="Buyer" EntitySet="Buyer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Cars" Association="Self.FK_Order_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Person" Association="Self.FK_Order_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producer_Cars" Association="Self.FK_Producer_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Producer" EntitySet="Producer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seller_Person" Association="Self.FK_Seller_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Seller" EntitySet="Seller" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CarsDealerShipModel2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Buyer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="ProducerId" Type="Int32" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Buyer_Person" FromRole="Buyer" ToRole="Person" />
+          <NavigationProperty Name="Producer" Relationship="Self.FK_Buyer_Producer" FromRole="Buyer" ToRole="Producer" />
+        </EntityType>
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Year" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Engine" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Fuel" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ServoDir" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Cars" FromRole="Cars" ToRole="Order" />
+          <NavigationProperty Name="Producers" Relationship="Self.FK_Producer_Cars" FromRole="Cars" ToRole="Producer" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" />
+          <Property Name="CarId" Type="Int32" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Order_Cars" FromRole="Order" ToRole="Cars" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Order_Person" FromRole="Order" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="BirthDate" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Buyers" Relationship="Self.FK_Buyer_Person" FromRole="Person" ToRole="Buyer" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Person" FromRole="Person" ToRole="Order" />
+          <NavigationProperty Name="Sellers" Relationship="Self.FK_Seller_Person" FromRole="Person" ToRole="Seller" />
+        </EntityType>
+        <EntityType Name="Producer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="CarId" Type="Int32" />
+          <NavigationProperty Name="Buyers" Relationship="Self.FK_Buyer_Producer" FromRole="Producer" ToRole="Buyer" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_Producer_Cars" FromRole="Producer" ToRole="Cars" />
+        </EntityType>
+        <EntityType Name="Seller">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="DealerShip_Address" Type="String" MaxLength="100" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="WorkPhone" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_Seller_Person" FromRole="Seller" ToRole="Person" />
+        </EntityType>
+        <Association Name="FK_Buyer_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Buyer" Type="Self.Buyer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyer">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Buyer_Producer">
+          <End Role="Producer" Type="Self.Producer" Multiplicity="0..1" />
+          <End Role="Buyer" Type="Self.Buyer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Buyer">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Cars">
+          <End Role="Cars" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Producer_Cars">
+          <End Role="Cars" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="Producer" Type="Self.Producer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cars">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Producer">
+              <PropertyRef Name="CarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Seller_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="Seller" Type="Self.Seller" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Seller">
+              <PropertyRef Name="PersonId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CarsDealerShipEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Buyers" EntityType="Self.Buyer" />
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="People" EntityType="Self.Person" />
+          <EntitySet Name="Producers" EntityType="Self.Producer" />
+          <EntitySet Name="Sellers" EntityType="Self.Seller" />
+          <AssociationSet Name="FK_Buyer_Person" Association="Self.FK_Buyer_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Buyer" EntitySet="Buyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Buyer_Producer" Association="Self.FK_Buyer_Producer">
+            <End Role="Producer" EntitySet="Producers" />
+            <End Role="Buyer" EntitySet="Buyers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Cars" Association="Self.FK_Order_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Producer_Cars" Association="Self.FK_Producer_Cars">
+            <End Role="Cars" EntitySet="Cars" />
+            <End Role="Producer" EntitySet="Producers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Person" Association="Self.FK_Order_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Seller_Person" Association="Self.FK_Seller_Person">
+            <End Role="Person" EntitySet="People" />
+            <End Role="Seller" EntitySet="Sellers" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CarsDealerShipModel2StoreContainer" CdmEntityContainer="CarsDealerShipEntities2">
+          <EntitySetMapping Name="Buyers">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Buyer">
+              <MappingFragment StoreEntitySet="Buyer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Car">
+              <MappingFragment StoreEntitySet="Cars">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Engine" ColumnName="Engine" />
+                <ScalarProperty Name="Fuel" ColumnName="Fuel" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="ServoDir" ColumnName="ServoDir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="People">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Producer">
+              <MappingFragment StoreEntitySet="Producer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="CarId" ColumnName="CarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sellers">
+            <EntityTypeMapping TypeName="CarsDealerShipModel2.Seller">
+              <MappingFragment StoreEntitySet="Seller">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="DealerShip_Address" ColumnName="DealerShip Address" />
+                <ScalarProperty Name="WorkPhone" ColumnName="WorkPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
