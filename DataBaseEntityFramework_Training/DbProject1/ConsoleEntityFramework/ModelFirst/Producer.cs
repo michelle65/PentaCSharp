@@ -29,7 +29,7 @@ namespace ConsoleEntityFramework.ModelFirst
         [StringLength(50)]
         public string ContactPerson { get; set; }
 
-        public int? CarId { get; set; }
+        public int CarId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Buyer> Buyers { get; set; }

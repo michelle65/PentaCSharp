@@ -12,9 +12,9 @@ namespace ConsoleEntityFramework.ModelFirst
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
-        public int? PersonId { get; set; }
+        public int PersonId { get; set; }
 
-        public int? ProducerId { get; set; }
+        public int ProducerId { get; set; }
 
         public virtual Person Person { get; set; }
 
