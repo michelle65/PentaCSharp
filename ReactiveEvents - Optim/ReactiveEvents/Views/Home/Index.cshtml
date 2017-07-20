@@ -1,0 +1,22 @@
+﻿@model IEnumerable<ReactiveEvents.Models.Comment>
+    @{
+        ViewData["Title"] = "Home Page";
+    }
+
+    @Html.React("CommentBox", new
+{
+    initialData = Model,
+    url = Url.Action("Comments"),
+    submitUrl = Url.Action("AddComment"),
+    pollInterval = 2000,
+})
+   
+
+    @section Scripts{
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.3.2/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.7.1/remarkable.min.js"></script>
+        <script src="@Url.Content("~/js/comments.jsx")"></script>
+        @Html.ReactInitJavaScript()
+    }
