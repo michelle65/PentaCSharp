@@ -1,0 +1,76 @@
+﻿@model IEnumerable<MVC_Homework_2.Models.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+<div class="row">
+    <div class="col-sm-2" style="background-color:Aquamarine ;">
+        <p>  @Html.DisplayNameFor(model => model.Title)</p>
+    </div>
+
+    <div class="col-sm-2" style="background-color:DarkSalmon ;">
+        <p> @Html.DisplayNameFor(model => model.Image)</p>
+    </div>
+
+    <div class="col-sm-2" style="background-color:Aquamarine ;">
+        <p> @Html.DisplayNameFor(model => model.Details)</p>
+    </div>
+    <div class="col-sm-2" style="background-color:DarkSalmon;">
+        <p>   @Html.DisplayNameFor(model => model.Location)</p>
+    </div>
+    <div class="col-sm-2" style="background-color:Aquamarine;">
+        <p>   @Html.DisplayNameFor(model => model.DateAndTime)</p>
+    </div>
+   
+</div>
+<br />
+@foreach (var item in Model)
+            {<div class="row">
+        <div class="col-sm-2" style="background-color:Teal  ;">
+            <p>@Html.DisplayFor(modelItem => item.Title)</p>
+        </div>
+
+                 <div class="col-sm-2" style="background-color:LightBlue ;">
+                     <p>@Html.DisplayFor(modelItem => item.Image)</p>
+                 </div>
+
+        <div class="col-sm-2" style="background-color:Teal ;">
+            <p>@Html.DisplayFor(modelItem => item.Details)</p>
+        </div>
+        <div class="col-sm-2" style="background-color:LightBlue ;">
+            <p>@Html.DisplayFor(modelItem => item.Location)</p>
+        </div>
+        <div class="col-sm-2" style="background-color:Teal;">
+            <p>@Html.DisplayFor(modelItem => item.DateAndTime)</p>
+        </div>
+        </div>
+    <p>
+
+        @Html.ActionLink("Update", "Update", new { id = item.EventId })
+
+
+
+        @Html.ActionLink("Details", "Details", new { id = item.EventId })
+
+        @Html.ActionLink("Delete", "Delete", new { id = item.EventId })
+
+
+
+    </p>
+    <div class="">
+
+        <button class="btn btn-danger btn-sm subscribeButton">Subscribe</button>
+        <br />
+        <br />
+    </div>
+
+}
+
