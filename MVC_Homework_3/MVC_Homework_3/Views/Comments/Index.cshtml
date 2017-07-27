@@ -1,0 +1,54 @@
+﻿@model IEnumerable<MVC_Homework_2.Models.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body style="background:#80BFFF">
+
+    <h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("New Comment", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Event.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Text)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+          
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Event.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Text)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EventId }, new { @style = "color:magenta;" })
+                    <span> | </span>
+                    @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @style = "color:black;" })
+                    <span> | </span>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EventId }, new { @style = "color:red;" })
+                    <span> | </span>
+                    @Html.ActionLink("Go To Event", "Index", "Events", new { id = item.EventId }, new { @class = "btn btn-info btn-cons", id = "ceva" })
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    </body>

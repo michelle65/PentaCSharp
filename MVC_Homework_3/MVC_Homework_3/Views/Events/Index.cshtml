@@ -1,0 +1,67 @@
+﻿@model IEnumerable<MVC_Homework_2.Models.Event>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<body style="background:#80BFFF">
+
+    <h2> Index</h2>
+
+    <p>
+        @Html.ActionLink("New Event", "Create", new { @style = "color:violet;" } )
+    </p>
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Details)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Location)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateAndTime)
+            
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Details)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateAndTime)
+                </td>
+
+              
+                <td>
+       @if (User.Identity.IsAuthenticated)
+                {
+              
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EventId }, new { @style = "color:magenta;" })
+        <span> | </span>
+           @Html.ActionLink("Details", "Details", new { id = item.EventId }, new { @style = "color:black;" })
+        <span> | </span>
+           @Html.ActionLink("Delete", "Delete", new { id = item.EventId }, new { @style = "color:red;" })
+        <span> | </span>
+
+               @* <a class="btn btn-default" href="/Events/Subscribe/@item.EventId">@item.IsSubscribed ? "Subscribe" : "Unsubscribe"</a>*@
+                        <button class="btn btn-danger btn-sm subscribeButton">Subscribe</button>
+                 
+       }
+                </td>
+            </tr>
+        }
+
+    </table>
+    </body>
